@@ -5,4 +5,5 @@ module.exports = {
   updateBookmark: require('./updateBookmark'),
   deleteBookmark: require('./deleteBookmark'),
   reorderBookmarks: require('./reorderBookmarks'),
+  syncBookmarks:require('./syncBookmarks')
 };

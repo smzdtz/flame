@@ -10,10 +10,12 @@ import {
   Config,
   NewBookmark,
   NewCategory,
+  SyncBookmarksRes,
 } from '../../interfaces';
 
 import {
   AddBookmarkAction,
+  SyncBookmarksAction,
   AddCategoryAction,
   DeleteBookmarkAction,
   DeleteCategoryAction,
@@ -103,6 +105,46 @@ export const addBookmark =
       });
 
       dispatch<any>(sortBookmarks(res.data.data.categoryId));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+export const syncBookmarks =
+  (file: FormData) => async (dispatch: Dispatch<SyncBookmarksAction>) => {
+    console.log('file', file);
+    try {
+      const res = await axios.post<ApiResponse<SyncBookmarksRes>>(
+        '/api/bookmarks/syncBookmarks',
+        file,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            ...applyAuth(),
+          },
+        }
+      );
+      // console.log(res);
+      // if(res.data.data.total === 0){}
+      const categories = await axios.get<ApiResponse<Category[]>>(
+        '/api/categories',
+        {
+          headers: applyAuth(),
+        }
+      );
+
+      dispatch<any>({
+        type: ActionType.getCategoriesSuccess,
+        payload: categories.data.data,
+      });
+      
+      dispatch<any>({
+        type: ActionType.createNotification,
+        payload: {
+          title: 'Success',
+          message: `Created ${res.data.data.total} bookmarks`,
+        },
+      });
     } catch (err) {
       console.log(err);
     }

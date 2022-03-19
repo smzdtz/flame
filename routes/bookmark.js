@@ -6,6 +6,7 @@ const { upload, auth, requireAuth } = require('../middleware');
 
 const {
   createBookmark,
+  syncBookmarks,
   getAllBookmarks,
   getSingleBookmark,
   updateBookmark,
@@ -17,6 +18,8 @@ router
   .route('/')
   .post(auth, requireAuth, upload, createBookmark)
   .get(auth, getAllBookmarks);
+
+router.route('/syncBookmarks').post(auth, requireAuth, upload, syncBookmarks);
 
 router
   .route('/:id')

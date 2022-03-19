@@ -19,6 +19,11 @@ export interface AddBookmarkAction {
   payload: Bookmark;
 }
 
+export interface SyncBookmarksAction {
+  type: ActionType.syncBookmarks;
+  payload: string;
+}
+
 export interface PinCategoryAction {
   type: ActionType.pinCategory;
   payload: Category;

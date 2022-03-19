@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ChangeEvent, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 // Redux
@@ -43,10 +43,11 @@ export const Bookmarks = (props: Props): JSX.Element => {
     bookmarks: { loading, categories, categoryInEdit },
     auth: { isAuthenticated },
   } = useSelector((state: State) => state);
+  const fileUpload = useRef<HTMLInputElement | null>(null);
 
   // Get Redux action creators
   const dispatch = useDispatch();
-  const { getCategories, setEditCategory, setEditBookmark } =
+  const { getCategories, setEditCategory, setEditBookmark, syncBookmarks } =
     bindActionCreators(actionCreators, dispatch);
 
   // Load categories if array is empty
@@ -64,7 +65,7 @@ export const Bookmarks = (props: Props): JSX.Element => {
   // Table
   const [showTable, setShowTable] = useState(false);
   const [tableContentType, setTableContentType] = useState(
-    ContentType.category
+    ContentType.bookmark
   );
 
   // Observe if user is authenticated -> set default view (grid) if not
@@ -133,6 +134,20 @@ export const Bookmarks = (props: Props): JSX.Element => {
     setEditCategory(null);
   };
 
+  const clickSyncButton = async () => {
+    fileUpload.current?.click();
+  };
+
+  const selectBookmark = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const formData = new FormData();
+      formData.append('icon', e.target.files[0]);
+      syncBookmarks(formData);
+      // fileUpload.current = null;
+      e.target.value = '';
+    }
+  };
+
   return (
     <Container>
       <Modal isOpen={modalIsOpen} setIsOpen={toggleModal}>
@@ -169,6 +184,20 @@ export const Bookmarks = (props: Props): JSX.Element => {
               handler={finishEditing}
             />
           )}
+        </div>
+      )}
+
+      {isAuthenticated && (
+        <div className={classes.SyncButton}>
+          <span onClick={clickSyncButton}>Sync Browser Bookmarks</span>
+          <input
+            ref={fileUpload}
+            onChange={(e) => selectBookmark(e)}
+            type="file"
+            name="icon"
+            id="icon"
+            accept=".html"
+          />
         </div>
       )}
 
