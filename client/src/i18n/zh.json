@@ -52,6 +52,19 @@
     "App icon": "应用图标",
     "App visibility": "应用可见性",
     "Visible (anyone can access it)": "公开",
-    "Hidden (authentication required)": "仅登录后可见"
+    "Hidden (authentication required)": "仅登录后可见",
+    "All Bookmarks": "所有书签",
+    "Category": "分类",
+    "category": "分类",
+    "Bookmark": "书签",
+    "Categories": "分类",
+    "Finish Editing": "完成编辑",
+    "Name": "名称",
+    "URL": "链接",
+    "Icon": "图标",
+    "Visibility": "可见性",
+    "Actions": "操作",
+    "Click on category name to edit its bookmarks": "点击分类编辑书签",
+    "Editing bookmarks from": "正在编辑"
   }
 }

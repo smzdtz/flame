@@ -54,6 +54,19 @@
     "Add new application": "Add new application",
     "Update application": "Update application",
     "Visible (anyone can access it)": "Visible (anyone can access it)",
-    "Hidden (authentication required)": "Hidden (authentication required)"
+    "Hidden (authentication required)": "Hidden (authentication required)",
+    "All Bookmarks": "All Bookmarks",
+    "Category": "Category",
+    "category": "category",
+    "Bookmark": "Bookmark",
+    "Categories": "Categories",
+    "Finish Editing": "Finish Editing",
+    "Name": "Name",
+    "URL": "URL",
+    "Icon": "Icon",
+    "Visibility": "Visibility",
+    "Actions": "Actions",
+    "Click on category name to edit its bookmarks": "Click on category name to edit its bookmarks",
+    "Editing bookmarks from": "Editing bookmarks from"
   }
 }
