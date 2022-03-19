@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import classes from './ActionButton.module.css';
 import { Icon } from '../..';
@@ -12,12 +13,13 @@ interface Props {
 }
 
 export const ActionButton = (props: Props): JSX.Element => {
+  const { t } = useTranslation();
   const body = (
     <Fragment>
       <div className={classes.ActionButtonIcon}>
         <Icon icon={props.icon} />
       </div>
-      <div className={classes.ActionButtonName}>{props.name}</div>
+      <div className={classes.ActionButtonName}>{t(props.name)}</div>
     </Fragment>
   );
 

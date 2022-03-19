@@ -1,5 +1,6 @@
 import { useState, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,6 +35,7 @@ export const Home = (): JSX.Element => {
   } = useSelector((state: State) => state);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { getApps, getCategories } = bindActionCreators(
     actionCreators,
     dispatch
@@ -107,8 +109,11 @@ export const Home = (): JSX.Element => {
       !apps.some((a) => a.isPinned) &&
       !categories.some((c) => c.isPinned) ? (
         <Message>
-          Welcome to Flame! Go to <Link to="/settings/app">/settings</Link>,
-          login and start customizing your new homepage
+          <>
+            {`${t('Welcome to')} Flame!  ${t('Go to')}`}
+            <Link to="/settings/app">{t('/settings')}</Link>,
+            {` ${t('login and start customizing your new homepage')}`}
+          </>
         </Message>
       ) : (
         <></>
@@ -116,7 +121,7 @@ export const Home = (): JSX.Element => {
 
       {!config.hideApps && (isAuthenticated || apps.some((a) => a.isPinned)) ? (
         <Fragment>
-          <SectionHeadline title="Applications" link="/applications" />
+          <SectionHeadline title={t('Applications')} link="/applications" />
           {appsLoading ? (
             <Spinner />
           ) : (
@@ -139,7 +144,7 @@ export const Home = (): JSX.Element => {
       {!config.hideCategories &&
       (isAuthenticated || categories.some((c) => c.isPinned)) ? (
         <Fragment>
-          <SectionHeadline title="Bookmarks" link="/bookmarks" />
+          <SectionHeadline title={t('Bookmarks')} link="/bookmarks" />
           {bookmarksLoading ? (
             <Spinner />
           ) : (

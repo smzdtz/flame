@@ -1,4 +1,5 @@
 import { FormEvent, Fragment, useEffect, useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,6 +14,7 @@ import classes from '../AppDetails.module.css';
 
 export const AuthForm = (): JSX.Element => {
   const { isAuthenticated, token } = useSelector((state: State) => state.auth);
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const { login, logout } = bindActionCreators(actionCreators, dispatch);
@@ -51,7 +53,7 @@ export const AuthForm = (): JSX.Element => {
       {!isAuthenticated ? (
         <form onSubmit={formHandler}>
           <InputGroup>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t('Password')}</label>
             <input
               type="password"
               id="password"
@@ -65,19 +67,19 @@ export const AuthForm = (): JSX.Element => {
               }
             />
             <span>
-              See
+              {t('See')}
               <a
                 href="https://github.com/pawelmalak/flame/wiki/Authentication"
                 target="blank"
               >
-                {` project wiki `}
+                {` ${t('project wiki')} `}
               </a>
-              to read more about authentication
+              {t('to read more about authentication')}
             </span>
           </InputGroup>
 
           <InputGroup>
-            <label htmlFor="duration">Session duration</label>
+            <label htmlFor="duration">{t('Session duration')}</label>
             <select
               id="duration"
               name="duration"
@@ -86,23 +88,23 @@ export const AuthForm = (): JSX.Element => {
                 setFormData({ ...formData, duration: e.target.value })
               }
             >
-              <option value="1h">1 hour</option>
-              <option value="1d">1 day</option>
-              <option value="14d">2 weeks</option>
-              <option value="30d">1 month</option>
-              <option value="1y">1 year</option>
+              <option value="1h">1 {t('hour')}</option>
+              <option value="1d">1 {t('day')}</option>
+              <option value="14d">2 {t('weeks')}</option>
+              <option value="30d">1 {t('month')}</option>
+              <option value="1y">1 {t('year')}</option>
             </select>
           </InputGroup>
 
-          <Button>Login</Button>
+          <Button>{t('Login')}</Button>
         </form>
       ) : (
         <div>
           <p className={classes.text}>
-            You are logged in. Your session will expire{' '}
+            {`${t('You are logged in. Your session will expire')} `}
             <span>{tokenExpires}</span>
           </p>
-          <Button click={logout}>Logout</Button>
+          <Button click={logout}>{t('Logout')}</Button>
         </div>
       )}
     </Fragment>

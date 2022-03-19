@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Redux
 import { useSelector } from 'react-redux';
@@ -16,6 +17,7 @@ import { getDateTime } from './functions/getDateTime';
 import { greeter } from './functions/greeter';
 
 export const Header = (): JSX.Element => {
+  const { t } = useTranslation();
   const { hideHeader, hideDate, showTime } = useSelector(
     (state: State) => state.config.config
   );
@@ -39,12 +41,12 @@ export const Header = (): JSX.Element => {
       {(!hideDate || showTime) && <p>{dateTime}</p>}
 
       <Link to="/settings" className={classes.SettingsLink}>
-        Go to Settings
+        {t('Go to Settings')}
       </Link>
 
       {!hideHeader && (
         <span className={classes.HeaderMain}>
-          <h1>{greeting}</h1>
+          <h1>{t(greeting)}</h1>
           <WeatherWidget />
         </span>
       )}

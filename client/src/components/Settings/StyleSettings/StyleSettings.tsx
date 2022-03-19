@@ -1,5 +1,6 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 // Redux
 import { useDispatch } from 'react-redux';
@@ -15,6 +16,7 @@ import { applyAuth } from '../../../utility';
 
 export const StyleSettings = (): JSX.Element => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { createNotification } = bindActionCreators(actionCreators, dispatch);
 
   const [customStyles, setCustomStyles] = useState<string>('');
@@ -52,7 +54,7 @@ export const StyleSettings = (): JSX.Element => {
   return (
     <form onSubmit={(e) => formSubmitHandler(e)}>
       <InputGroup>
-        <label htmlFor="customStyles">Custom CSS</label>
+        <label htmlFor="customStyles">{t('Custom CSS')}</label>
         <textarea
           id="customStyles"
           name="customStyles"
@@ -61,7 +63,7 @@ export const StyleSettings = (): JSX.Element => {
           spellCheck={false}
         ></textarea>
       </InputGroup>
-      <Button>Save CSS</Button>
+      <Button>{t('Save changes')}</Button>
     </form>
   );
 };

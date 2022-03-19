@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,6 +29,8 @@ interface Props {
 }
 
 export const Apps = (props: Props): JSX.Element => {
+  const { t } = useTranslation();
+
   // Get Redux state
   const {
     apps: { apps, loading },
@@ -78,8 +81,8 @@ export const Apps = (props: Props): JSX.Element => {
       </Modal>
 
       <Headline
-        title="All Applications"
-        subtitle={<Link to="/">Go back</Link>}
+        title={t('All Applications')}
+        subtitle={<Link to="/">{t('Go back')}</Link>}
       />
 
       {isAuthenticated && (

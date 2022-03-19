@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, Fragment, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +20,8 @@ import { State } from '../../../store/reducers';
 import { inputHandler, themeSettingsTemplate } from '../../../utility';
 
 export const Themer = (): JSX.Element => {
+  const { t } = useTranslation();
+
   const {
     auth: { isAuthenticated },
     config: { loading, config },
@@ -65,7 +68,7 @@ export const Themer = (): JSX.Element => {
 
   return (
     <Fragment>
-      <SettingsHeadline text="Set theme" />
+      <SettingsHeadline text={t('Set theme')} />
       <div className={classes.ThemerGrid}>
         {themes.map(
           (theme: Theme, idx: number): JSX.Element => (
@@ -76,9 +79,9 @@ export const Themer = (): JSX.Element => {
 
       {isAuthenticated && (
         <form onSubmit={formSubmitHandler}>
-          <SettingsHeadline text="Other settings" />
+          <SettingsHeadline text={t('Other settings')} />
           <InputGroup>
-            <label htmlFor="defaultTheme">Default theme (for new users)</label>
+            <label htmlFor="defaultTheme">{t('Default theme (for new users)')}</label>
             <select
               id="defaultTheme"
               name="defaultTheme"
@@ -93,7 +96,7 @@ export const Themer = (): JSX.Element => {
             </select>
           </InputGroup>
 
-          <Button>Save changes</Button>
+          <Button>{t('Save changes')}</Button>
         </form>
       )}
     </Fragment>

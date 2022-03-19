@@ -1,5 +1,7 @@
 import { useState, useEffect, ChangeEvent, SyntheticEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+
 import { NewApp } from '../../../interfaces';
 
 import classes from './AppForm.module.css';
@@ -16,6 +18,7 @@ interface Props {
 
 export const AppForm = ({ modalHandler }: Props): JSX.Element => {
   const { appInUpdate } = useSelector((state: State) => state.apps);
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const { addApp, updateApp, setEditApp } = bindActionCreators(
@@ -96,7 +99,7 @@ export const AppForm = ({ modalHandler }: Props): JSX.Element => {
     <ModalForm modalHandler={modalHandler} formHandler={formSubmitHandler}>
       {/* NAME */}
       <InputGroup>
-        <label htmlFor="name">App name</label>
+        <label htmlFor="name">{t('App name')}</label>
         <input
           type="text"
           name="name"
@@ -110,7 +113,7 @@ export const AppForm = ({ modalHandler }: Props): JSX.Element => {
 
       {/* URL */}
       <InputGroup>
-        <label htmlFor="url">App URL</label>
+        <label htmlFor="url">{t('App URL')}</label>
         <input
           type="text"
           name="url"
@@ -124,7 +127,7 @@ export const AppForm = ({ modalHandler }: Props): JSX.Element => {
 
       {/* DESCRIPTION */}
       <InputGroup>
-        <label htmlFor="description">App description</label>
+        <label htmlFor="description">{t('App description')}</label>
         <input
           type="text"
           name="description"
@@ -142,7 +145,7 @@ export const AppForm = ({ modalHandler }: Props): JSX.Element => {
       {!useCustomIcon ? (
         // use mdi icon
         <InputGroup>
-          <label htmlFor="icon">App icon</label>
+          <label htmlFor="icon">{t('App icon')}</label>
           <input
             type="text"
             name="icon"
@@ -169,7 +172,7 @@ export const AppForm = ({ modalHandler }: Props): JSX.Element => {
       ) : (
         // upload custom icon
         <InputGroup>
-          <label htmlFor="icon">App Icon</label>
+          <label htmlFor="icon">{t('App icon')}</label>
           <input
             type="file"
             name="icon"
@@ -192,15 +195,15 @@ export const AppForm = ({ modalHandler }: Props): JSX.Element => {
 
       {/* VISIBILITY */}
       <InputGroup>
-        <label htmlFor="isPublic">App visibility</label>
+        <label htmlFor="isPublic">{t('App visibility')}</label>
         <select
           id="isPublic"
           name="isPublic"
           value={formData.isPublic ? 1 : 0}
           onChange={(e) => inputChangeHandler(e, { isBool: true })}
         >
-          <option value={1}>Visible (anyone can access it)</option>
-          <option value={0}>Hidden (authentication required)</option>
+          <option value={1}>{t('Visible (anyone can access it)')}</option>
+          <option value={0}>{t('Hidden (authentication required)')}</option>
         </select>
       </InputGroup>
 
