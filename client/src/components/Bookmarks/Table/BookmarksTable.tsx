@@ -1,4 +1,5 @@
 import { useState, useEffect, Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   DragDropContext,
   Droppable,
@@ -31,6 +32,7 @@ export const BookmarksTable = ({ openFormForUpdating }: Props): JSX.Element => {
   } = useSelector((state: State) => state);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const {
     deleteBookmark,
     updateBookmark,
@@ -110,8 +112,8 @@ export const BookmarksTable = ({ openFormForUpdating }: Props): JSX.Element => {
         </Message>
       ) : (
         <Message isPrimary={false}>
-          Editing bookmarks from&nbsp;<span>{categoryInEdit.name}</span>
-          &nbsp;category
+          {t('Editing bookmarks from')}&nbsp;<span>{categoryInEdit.name}</span>
+          &nbsp;{t('category')}
         </Message>
       )}
 
