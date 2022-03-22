@@ -1,4 +1,4 @@
-# Flame
+# Miao
 
 ![Homescreen screenshot](.github/home.png)
 
