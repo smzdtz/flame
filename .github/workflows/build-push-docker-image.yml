@@ -29,3 +29,16 @@ jobs:
           file: ./.docker/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/miao:next
+
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PRODHOST }}
+          username: ${{ secrets.PRODUSERNAME }}
+          password: ${{ secrets.PRODPASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            docker stop miao
+            docker rm miao
+            docker pull zdeteam/miao:next
+            docker run -d --name miao --restart always -p 5005:5005 -v /home/flame/data:/app/data -e PASSWORD=abc123pwd! zdeteam/miao:next
